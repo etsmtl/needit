@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{annonceBean.page}'/>
+		<f:event type="preRenderView" listener='#{annonceBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Annonce entities"/>
+
+	<ui:define name="header">
+		Annonce
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Annonce entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="annonceBeanExampleTitre" value="Titre:"/>
+						<h:panelGroup>
+							<h:inputText id="annonceBeanExampleTitre" value="#{annonceBean.example.titre}"/>
+							<h:message for="annonceBeanExampleTitre" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="annonceBeanExampleDescription" value="Description:"/>
+						<h:panelGroup>
+							<h:inputText id="annonceBeanExampleDescription" value="#{annonceBean.example.description}"/>
+							<h:message for="annonceBeanExampleDescription" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="annonceBeanExampleEtatitem" value="Etat_item:"/>
+						<h:panelGroup>
+							<h:inputText id="annonceBeanExampleEtatitem" value="#{annonceBean.example.etat_item}"/>
+							<h:message for="annonceBeanExampleEtatitem" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="annonceBeanExamplePhotoitem1" value="Photo_item_1:"/>
+						<h:panelGroup>
+							<h:inputText id="annonceBeanExamplePhotoitem1" value="#{annonceBean.example.photo_item_1}"/>
+							<h:message for="annonceBeanExamplePhotoitem1" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="annonceBeanExamplePhotoitem2" value="Photo_item_2:"/>
+						<h:panelGroup>
+							<h:inputText id="annonceBeanExamplePhotoitem2" value="#{annonceBean.example.photo_item_2}"/>
+							<h:message for="annonceBeanExamplePhotoitem2" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{annonceBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{annonceBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="annonceBeanPageItems" styleClass="data-table" value="#{annonceBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Titre"/>
+					</f:facet>
+					<h:link outcome="/annonce/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemTitre" value="#{_item.titre}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description"/>
+					</f:facet>
+					<h:link outcome="/annonce/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemDescription" value="#{_item.description}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Etat_item"/>
+					</f:facet>
+					<h:link outcome="/annonce/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemEtatitem" value="#{_item.etat_item}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Disponiblite"/>
+					</f:facet>
+					<h:link outcome="/annonce/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemDisponiblite" value="#{_item.disponiblite}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Photo_item_1"/>
+					</f:facet>
+					<h:link outcome="/annonce/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemPhotoitem1" value="#{_item.photo_item_1}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{annonceBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>
